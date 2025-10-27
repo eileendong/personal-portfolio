@@ -85,8 +85,7 @@ export default function App() {
           transition={{ duration: 1, delay: 0.2 }}
           className="text-white/70 max-w-2xl mt-8 mb-8 leading-relaxed text-lg"
         >
-          Studying Computer Science @ University of Washington — excited about Back-End,
-          Cloud, and DevOps.
+          Studying Computer Science @ University of Washington — happy to see you!!
         </motion.p>
 
         <motion.div
