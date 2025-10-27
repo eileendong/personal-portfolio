@@ -84,7 +84,7 @@ export default function App() {
           transition={{ duration: 1, delay: 0.2 }}
           className="text-white/70 max-w-2xl mt-8 mb-8 leading-relaxed text-lg"
         >
-          Studying Computer Science @ University of Washington — happy to see you!!
+          Studying Computer Science @ University of Washington '27 — happy to see you!!
         </motion.p>
 
         <motion.div
@@ -438,13 +438,13 @@ export default function App() {
   </div>
 </section>
 
-      {/* === CONTACT === */}
+     
       <section id="contact" className="px-12 py-24 text-center text-white">
-        <h2 className="text-4xl font-semibold mb-8">Get in Touch</h2>
+        <h2 className="text-4xl font-semibold mb-8">Talk to me!</h2>
         <p className="text-white/60 mb-8">
-          Talk to me!
+          <a href="mailto:eileendong1@gmail.com" className="underline hover:text-white transition"> eileendong1@gmail.com </a> • Seattle, WA • <a href="https://www.linkedin.com/in/eileendong/" className="underline hover:text-white transition">LinkedIn</a> • <a href="https://github.com/eileendong" className="underline hover:text-white transition">GitHub</a>
         </p>
-        <form
+        {/* <form
           onSubmit={(e) => e.preventDefault()}
           className="max-w-md mx-auto space-y-4"
         >
@@ -472,7 +472,7 @@ export default function App() {
           >
             Send Message
           </button>
-        </form>
+        </form> */}
       </section>
       {/* === FOOTER === */}
       <footer className="py-8 text-center text-white/50 text-sm border-t border-white/10">
