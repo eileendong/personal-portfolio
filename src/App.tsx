@@ -25,8 +25,6 @@ import {
   Cable,  Home,
   Bot,
   Calendar,
-  Moon,
-  Sun,
   ServerCog,
   Laptop,
   Code2,
@@ -61,7 +59,7 @@ export default function App() {
             onClick={toggleTheme}
             className="border px-3 py-1 rounded-full backdrop-blur-sm bg-white/10 hover:bg-white/20 transition flex items-center justify-center"
           >
-            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+            {theme === "dark" ? "😅" : "😎"}
           </button>
         </div>
       </nav>
