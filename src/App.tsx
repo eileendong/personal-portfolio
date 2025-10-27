@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import "./index.css";
 import { OceanNightBackground } from "./components/OceanNightBackground";
-
+import { Analytics } from "@vercel/analytics/next";
 import {
   Code,
   FileCode,
