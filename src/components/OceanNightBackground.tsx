@@ -101,6 +101,33 @@ drawWave(canvas.height * 0.77, 20, 0.0045, Math.PI * 1.7, '#102f4b', 0.6, 0.008)
 drawWave(canvas.height * 0.72, 26, 0.006, Math.PI / 3, '#113656', 0.55, 0.007);
 drawWave(canvas.height * 0.67, 18, 0.0038, Math.PI * 1.9, '#132e45', 0.55, 0.009);
 
+ctx.globalAlpha = 0.25;
+const reflectionGradient = ctx.createLinearGradient(0, 0, canvas.width * 0.6, 0);
+reflectionGradient.addColorStop(0, "rgba(255, 255, 255, 0.25)");
+reflectionGradient.addColorStop(0.15, "rgba(200, 220, 255, 0.08)");
+reflectionGradient.addColorStop(0.4, "rgba(150, 180, 255, 0.02)");
+reflectionGradient.addColorStop(1, "rgba(255,255,255,0)");
+ctx.fillStyle = reflectionGradient;
+ctx.fillRect(0, canvas.height * 0.6, canvas.width, canvas.height * 0.4);
+ctx.globalAlpha = 1;
+// === Subtle white crest outline ===
+ctx.globalAlpha = 0.15;
+ctx.beginPath();
+for (let x = 0; x <= canvas.width; x += 2) {
+  const y =
+    canvas.height * 0.85 +
+    Math.sin(x * 0.004 + waveOffset) * 25 +
+    Math.sin(x * 0.007 + waveOffset * 0.8) * 10;
+  ctx.lineTo(x, y);
+}
+ctx.strokeStyle = "rgba(255, 255, 255, 0.59)";
+ctx.lineWidth = 1;
+ctx.shadowBlur = 12;
+ctx.shadowColor = "rgba(200, 220, 255, 0.96)";
+ctx.stroke();
+ctx.shadowBlur = 0;
+ctx.globalAlpha = 1;
+
       ctx.globalAlpha = 0.08;
       for (let i = 0; i < 3; i++) {
         const baseY = canvas.height * (0.87 - i * 0.1);

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import "./index.css";
 import { OceanNightBackground } from "./components/OceanNightBackground";
+import { mark } from "framer-motion/client";
 
 export default function App() {
   const [theme, setTheme] = useState("dark");
@@ -35,27 +36,28 @@ export default function App() {
         </div>
       </nav>
 
-      {/* === HERO === */}
-      <section className="flex flex-col items-center justify-center text-center py-32 relative">
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-5xl md:text-6xl font-semibold mb-6 text-white"
-        >
-          <h1 className="text-6xl font-semibold leading-tight tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-blue-300 via-cyan-200 to-purple-400">
-          Exploring, Learning, <br />Figuring it out.
-          </h1>
-        </motion.h1>
-          
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="text-white/70 max-w-2xl mb-10 leading-relaxed text-lg"
-        >
-          Computer Science @ University of Washington — excited about Back-End, Cloud, DevOps, and more.
-        </motion.p>
+     {/* === HERO === */}
+<section className="flex flex-col items-center justify-center text-center py-32 relative">
+  <motion.h1
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1 }}
+    className="text-5xl md:text-6xl font-semibold leading-snug md:leading-[1.15] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-blue-300 via-cyan-200 to-purple-400 pb-2"
+  >
+    Exploring, Learning,<br />
+    Figuring it out. \n
+  </motion.h1>
+
+  <motion.p
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1, delay: 0.2 }}
+    style={{ marginBottom: "1.5rem" }}
+    className="text-white/70 max-w-2xl mt-8 leading-relaxed text-lg"
+  >
+    Studying Computer Science @ University of Washington - Welcome!!
+  </motion.p> 
+
 
         <motion.div
         
