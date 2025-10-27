@@ -442,7 +442,7 @@ export default function App() {
       <section id="contact" className="px-12 py-24 text-center text-white">
         <h2 className="text-4xl font-semibold mb-8">Talk to me!</h2>
         <p className="text-white/60 mb-8">
-          <a href="mailto:eileendong1@gmail.com" className="underline hover:text-white transition"> eileendong1@gmail.com </a> • Seattle, WA • <a href="https://www.linkedin.com/in/eileendong/" className="underline hover:text-white transition">LinkedIn</a> • <a href="https://github.com/eileendong" className="underline hover:text-white transition">GitHub</a>
+          <a href="mailto:eileendong1@gmail.com" className="underline hover:text-white transition"> eileendong1@gmail.com </a> • Seattle, WA • <a href="https://www.linkedin.com/in/eileen-dong-459187136/" className="underline hover:text-white transition">LinkedIn</a> • <a href="https://github.com/eileendong" className="underline hover:text-white transition">GitHub</a>
         </p>
         {/* <form
           onSubmit={(e) => e.preventDefault()}
