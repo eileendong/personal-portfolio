@@ -474,7 +474,6 @@ export default function App() {
           </button>
         </form>
       </section>
-      <Analytics />
       {/* === FOOTER === */}
       <footer className="py-8 text-center text-white/50 text-sm border-t border-white/10">
         © {new Date().getFullYear()} Eileen Dong • Built with React, Tailwind, & Framer Motion
