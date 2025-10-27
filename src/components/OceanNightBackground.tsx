@@ -92,11 +92,11 @@ export function OceanNightBackground() {
       };
 
       // Balanced deep-ocean tone — darker, moodier, but still visible beneath glass UI
-drawWave(canvas.height * 1, 15, 0.002, 0, '#07101c', 0.85, 0.008);
+drawWave(canvas.height * 0.98, 15, 0.002, 0, '#07101c', 0.85, 0.008);
 drawWave(canvas.height * 0.95, 22, 0.003, Math.PI / 4, '#091626', 0.75, 0.007);
-drawWave(canvas.height * 0.91, 28, 0.004, Math.PI / 2, '#0b1d30', 0.7, 0.009);
+drawWave(canvas.height * 0.91, 30, 0.004, Math.PI / 2, '#0b1d30', 0.7, 0.009);
 drawWave(canvas.height * 0.87, 25, 0.0035, Math.PI, '#0d2338', 0.65, 0.006);
-drawWave(canvas.height * 0.82, 32, 0.005, Math.PI * 1.3, '#0e2a42', 0.65, 0.01);
+drawWave(canvas.height * 0.82, 38, 0.005, Math.PI * 1.3, '#0e2a42', 0.65, 0.01);
 drawWave(canvas.height * 0.77, 20, 0.0045, Math.PI * 1.7, '#102f4b', 0.6, 0.008);
 drawWave(canvas.height * 0.72, 26, 0.006, Math.PI / 3, '#113656', 0.55, 0.007);
 drawWave(canvas.height * 0.67, 18, 0.0038, Math.PI * 1.9, '#132e45', 0.55, 0.009);
