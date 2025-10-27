@@ -37,6 +37,7 @@ export default function App() {
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
   return (
+    
     <div className="relative min-h-screen overflow-hidden">
       <div className="fixed inset-0 -z-10">
         <OceanNightBackground />
@@ -473,7 +474,7 @@ export default function App() {
           </button>
         </form>
       </section>
-
+      <Analytics />
       {/* === FOOTER === */}
       <footer className="py-8 text-center text-white/50 text-sm border-t border-white/10">
         © {new Date().getFullYear()} Eileen Dong • Built with React, Tailwind, & Framer Motion
