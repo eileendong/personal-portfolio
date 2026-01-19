@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Analytics } from "@vercel/analytics/react";
 import "./index.css";
 import { OceanNightBackground } from "./components/OceanNightBackground";
 
@@ -478,6 +479,7 @@ export default function App() {
       <footer className="py-8 text-center text-white/50 text-sm border-t border-white/10">
         © {new Date().getFullYear()} Eileen Dong • Built with React, Tailwind, & Framer Motion
       </footer>
+      <Analytics />
     </div>
     
   );
