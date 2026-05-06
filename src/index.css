@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ================================================
-   ✨ GLOBAL STYLING — Ocean Night Theme
+   ✨ GLOBAL STYLING — Slate/Teal Professional Theme
    ================================================ */
 
 html {
@@ -11,185 +11,44 @@ html {
 }
 
 body {
-  @apply text-gray-100 font-sans overflow-x-hidden;
-  background: linear-gradient(180deg, #001122, #001a33, #000a1f);
-  background-attachment: fixed;
+  @apply text-slate-400 font-sans overflow-x-hidden;
+  background-color: #0f172a;
   min-height: 100vh;
-  transition: background 0.5s ease, color 0.5s ease;
 }
 
-/* Ocean shimmer overlay */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  /* background: radial-gradient(circle at 50% 60%, rgba(1, 86, 161, 0.103), transparent 10%),
-              radial-gradient(circle 50  px at 20% 10%, rgba(103, 0, 200, 0.164), transparent 10%); */
-  animation: drift 12s ease-in-out infinite alternate;
-  mix-blend-mode: screen;
-  opacity: 0.4;
-  filter: blur(2px);
-  z-index: -1;
-}
-
-/* Vignette */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
-  z-index: -2;
-  pointer-events: none;
-}
-
-@keyframes drift {
-  0% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-2%) scale(1.02); }
-  100% { transform: translateY(0) scale(1); }
+/* Selection styling */
+::selection {
+  background-color: rgba(45, 212, 191, 0.3);
+  color: #f1f5f9;
 }
 
 /* ================================================
-   🌊 GLOBAL EFFECTS & UTILITIES
+   📌 NAVIGATION STYLES
    ================================================ */
 
-/* Smooth fade-in on scroll (used by Framer Motion sections) */
-section {
-  transition: opacity 1s ease, transform 1s ease;
-  scroll-margin-top: 80px;
+/* Navigation indicator line animation */
+.nav-indicator {
+  transition: width 0.25s ease, background-color 0.25s ease;
 }
 
-/* Navigation background */
-.nav-bg {
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-/* Reusable glassy button - improved contrast */
-.btn-glass {
-  @apply px-6 py-3 rounded-full border border-white/30 text-white
-         backdrop-blur-xl bg-white/10 hover:bg-white/20 hover:border-white/40
-         transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.08)]
-         font-medium;
-}
-
-/* Improved touch targets for mobile */
-@media (max-width: 768px) {
-  .btn-glass {
-    @apply px-5 py-3 text-base min-h-[44px];
-  }
-
-  nav a, nav button {
-    min-height: 44px;
-    min-width: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-/* Card base style */
-.card {
-  @apply bg-white/5 border border-white/10 backdrop-blur-2xl 
-         rounded-3xl transition-transform duration-300 ease-in-out;
-  animation: pulseGlow 12s ease-in-out infinite;
-}
-
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(255,255,255,0.04),
-                0 0 40px rgba(99,102,241,0.05);
-  }
-  50% {
-    box-shadow: 0 0 35px rgba(255,255,255,0.08),
-                0 0 80px rgba(147,197,253,0.1);
-  }
-}
-
-/* Subtle hover glow for cards and buttons */
-.card:hover, .btn-glass:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 0 25px rgba(147,197,253,0.1), 0 0 50px rgba(0,150,255,0.15);
-}
-
-/* Animated glowing dots for skill levels */
-.skill-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  margin-left: 3px;
-}
-.skill-dot.filled {
-  background-color: #60a5fa;
-  box-shadow: 0 0 6px #60a5fa, 0 0 12px rgba(96,165,250,0.6);
-}
-.skill-dot.empty {
-  background-color: rgba(255,255,255,0.1);
+/* Navigation text */
+.nav-text {
+  transition: color 0.25s ease;
 }
 
 /* ================================================
-   🌫️ Canvas Overlay for OceanNightBackground
-   ================================================ */
-canvas {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-/* Ensure all sections stay above the background */
-section {
-  position: relative;
-  z-index: 10;
-}
-
-/* Prevent footer overlap issues */
-footer {
-  position: relative;
-  z-index: 10;
-}
-
-section {
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-
-section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-html {
-  scroll-snap-type: y mandatory;
-}
-@keyframes bubbleRise {
-  0% { transform: translateY(0) scale(1); opacity: 0.3; }
-  70% { opacity: 0.6; }
-  100% { transform: translateY(-120vh) scale(1.1); opacity: 0; }
-}
-
-@keyframes waveFlow {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(4px); }
-  100% { transform: translateY(0); }
-}
-
-/* ================================================
-   ♿ ACCESSIBILITY
+   🎯 FOCUS STATES & ACCESSIBILITY
    ================================================ */
 
-/* Skip to content link - hidden until focused */
+/* Skip to content link */
 .skip-link {
   position: absolute;
   top: -100%;
   left: 0;
   z-index: 9999;
   padding: 1rem 1.5rem;
-  background: #2563eb;
-  color: white;
+  background: #2dd4bf;
+  color: #0f172a;
   font-weight: 600;
   border-radius: 0 0 0.5rem 0;
   transition: top 0.3s ease;
@@ -197,7 +56,7 @@ html {
 
 .skip-link:focus {
   top: 0;
-  outline: 2px solid white;
+  outline: 2px solid #f1f5f9;
   outline-offset: 2px;
 }
 
@@ -226,14 +85,71 @@ html {
   white-space: normal;
 }
 
+/* Focus visible states for keyboard navigation */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #2dd4bf;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 /* ================================================
    📱 RESPONSIVE IMPROVEMENTS
    ================================================ */
 
-@media (max-width: 640px) {
-  /* Stack skills legend on mobile */
-  .skills-legend {
-    flex-direction: column;
-    gap: 0.5rem;
+/* Ensure section headers are visible on mobile scroll */
+@media (max-width: 1023px) {
+  section {
+    scroll-margin-top: 80px;
   }
+}
+
+/* Improved touch targets for mobile */
+@media (max-width: 768px) {
+  nav a, 
+  nav button {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ================================================
+   🌊 SMOOTH TRANSITIONS
+   ================================================ */
+
+/* Smooth opacity transitions for list items */
+.group\/list > li {
+  transition: opacity 0.2s ease;
+}
+
+/* Card hover states */
+.group:hover .group-hover\:bg-slate-800\/50 {
+  background-color: rgba(30, 41, 59, 0.5);
+}
+
+/* Link underline animation */
+a span.border-b {
+  transition: border-color 0.25s ease;
+}
+
+/* ================================================
+   🎨 CUSTOM UTILITIES
+   ================================================ */
+
+/* Gradient text utility */
+.gradient-text {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-400;
+}
+
+/* Subtle glow effect */
+.glow {
+  box-shadow: 0 0 40px -10px rgba(45, 212, 191, 0.3);
+}
+
+/* Glass morphism card */
+.glass-card {
+  @apply bg-slate-800/50 backdrop-blur-md border border-slate-700/50 rounded-lg;
 }
