@@ -178,7 +178,7 @@ export default function App() {
                 Software Engineer
               </h2>
               <p className="mt-4 max-w-xs leading-normal text-slate-400">
-                I build reliable infrastructure, ship production systems, and turn complex problems into elegant solutions.
+                I’m most interested in the parts of software that support everything else: infrastructure, automation, and security.
               </p>
 
               {/* Desktop Navigation */}
@@ -320,8 +320,8 @@ export default function App() {
                 </p>
 
                 <p>
-                  When I&apos;m not writing code, you can find me exploring Seattle&apos;s coffee shops, 
-                  contributing to robotics projects, or working on AI-powered tools that make learning more accessible.
+                  When I&apos;m not coding, you can find me playing with my cat Pebbles, exploring Seattle&apos;s farmers markets, 
+                  or cooking way too much food for one person.
                 </p>
               </div>
             </section>
