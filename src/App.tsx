@@ -323,6 +323,18 @@ export default function App() {
                   While I&apos;m not coding, you can find me playing with my cat Pebbles, exploring Seattle&apos;s farmers markets, 
                   or cooking way too much food for one person.
                 </p>
+
+                {/* Cat photo */}
+                <div className="mt-6">
+                  <img 
+                    src="/images/cat.jpg" 
+                    alt="Pebbles the cat being petted" 
+                    className="rounded-lg w-48 h-48 object-cover shadow-lg border border-slate-700/50"
+                  />
+                  <p className="text-xs text-slate-500 mt-2">Pebbles ^^</p>
+                </div>
+
+                
               </div>
             </section>
 
@@ -403,7 +415,7 @@ export default function App() {
                     className="inline-flex items-center font-medium leading-tight text-slate-200 group"
                   >
                     <span className="border-b border-transparent pb-px transition group-hover:border-teal-300 motion-reduce:transition-none">
-                      View Full Résumé
+                      View My Resume!
                     </span>
                     <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-2 motion-reduce:transition-none" />
                   </a>
