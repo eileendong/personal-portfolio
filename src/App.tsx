@@ -331,7 +331,7 @@ export default function App() {
                     alt="Pebbles the cat being petted" 
                     className="rounded-lg w-48 h-48 object-cover shadow-lg border border-slate-700/50"
                   />
-                  <p className="text-xs text-slate-500 mt-2">Pebbles</p>
+                  <p className="text-xs text-slate-500 mt-2">Pebbles ^^</p>
                 </div>
 
                 {/* Resume link */}
