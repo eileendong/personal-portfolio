@@ -415,7 +415,7 @@ export default function App() {
                     className="inline-flex items-center font-medium leading-tight text-slate-200 group"
                   >
                     <span className="border-b border-transparent pb-px transition group-hover:border-teal-300 motion-reduce:transition-none">
-                      View Full Résumé
+                      View My Resume!
                     </span>
                     <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-2 motion-reduce:transition-none" />
                   </a>
