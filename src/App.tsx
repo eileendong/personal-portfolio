@@ -411,7 +411,7 @@ export default function App() {
 
                 <div className="mt-12">
                   <a
-                    href="/Eileen_Dong_Resume.pdf"
+                    href="https://drive.google.com/file/d/1Zq8XdVQiVLua2d3aVbJX5PMwk8XZ3pGX/view?usp=sharing"
                     className="inline-flex items-center font-medium leading-tight text-slate-200 group"
                   >
                     <span className="border-b border-transparent pb-px transition group-hover:border-teal-300 motion-reduce:transition-none">
