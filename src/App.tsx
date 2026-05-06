@@ -1,677 +1,634 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./index.css";
-import { OceanNightBackground } from "./components/OceanNightBackground";
 
 import {
-  Code,
-  FileCode,
-  Braces,
-  Database,
-  Layout,
-  Rocket,
-  Cpu,
-  Network,
-  Cloud,
-  GitBranch,
-  Server,
-  Terminal,
-  Workflow,
-  Gauge,
-  Boxes,
-  Layers,
-  Coffee,
-  Wrench,
-  Cable,
-  Home,
-  Bot,
-  Calendar,
-  ServerCog,
-  Laptop,
-  Code2,
-  FileText,
-  Palette,
+  Github,
+  Linkedin,
+  Mail,
+  ExternalLink,
+  ArrowUpRight,
   Menu,
   X,
-  ExternalLink,
-  Sparkles,
+  MapPin,
+  ChevronRight,
 } from "lucide-react";
 
-// Project data with optional demo links
-const projects = [
+// Experience data from resume
+const experiences = [
   {
-    icon: <Home className="w-8 h-8 text-amber-300" />,
-    title: "Roomies",
-    desc: "Smart expense splitting with receipt photo parsing. Automatically extracts costs using computer vision and syncs in real-time across roommates.",
-    tech: ["AWS", "React", "Amplify"],
-    link: "https://github.com/eileendong/roomies",
-    glow: "from-amber-400/0 via-amber-400/0 to-amber-400/10",
-    shadow: "hover:shadow-amber-400/20",
+    period: "Summer 2026",
+    role: "Software Engineer Intern",
+    company: "Axon",
+    companyUrl: "https://www.axon.com",
+    location: "Seattle, WA",
+    description:
+      "Incoming DevOps platform intern building a zero-touch DevOps application to automate end-to-end infrastructure provisioning and deployment workflows at scale.",
+    tech: ["DevOps", "Infrastructure", "Automation"],
   },
   {
-    icon: <Bot className="w-8 h-8 text-blue-400" />,
-    title: "Dub-Grind",
-    desc: "Discord bot that transforms lecture recordings into study materials. Auto-generates summaries and practice quizzes using RAG architecture.",
-    tech: ["Python", "LangChain", "LlamaIndex"],
-    link: "https://github.com/eileendong/dub-grind2",
-    glow: "from-blue-500/0 via-blue-500/0 to-blue-500/10",
-    shadow: "hover:shadow-blue-400/20",
+    period: "Summer 2025",
+    role: "Software Engineer Intern",
+    company: "H-E-B",
+    companyUrl: "https://www.heb.com",
+    location: "Austin, TX",
+    description:
+      "Replaced a legacy Dell OME alerting pipeline with a FastAPI microservice across 13K+ servers, achieving 99% delivery reliability and preventing $300K+ outage costs per incident. Containerized services with Docker and Kubernetes; automated CI/CD pipelines with Prometheus + OpenTelemetry instrumentation.",
+    tech: ["FastAPI", "Docker", "Kubernetes", "Prometheus", "OpenTelemetry"],
   },
   {
-    icon: <Calendar className="w-8 h-8 text-purple-300" />,
-    title: "Synchronize",
-    desc: "Find mutual free time across friend groups. Syncs Google Calendars via OAuth and highlights overlapping availability.",
-    tech: ["React", "Google API", "OAuth 2.0"],
-    link: "https://github.com/eileendong/synchronize",
-    glow: "from-purple-500/0 via-purple-500/0 to-purple-500/10",
-    shadow: "hover:shadow-purple-400/20",
+    period: "Jan 2024 – Present",
+    role: "Student IT Technician",
+    company: "University of Washington",
+    companyUrl: "https://www.washington.edu",
+    location: "Seattle, WA",
+    description:
+      "Resolved 400+ hardware/software issues across Windows, macOS, and Linux. Automated imaging and inventory workflows, cutting device setup time by 40%. Trained 5 technicians and standardized documentation.",
+    tech: ["Windows", "macOS", "Linux", "Automation"],
   },
   {
-    icon: <Cloud className="w-8 h-8 text-cyan-300" />,
-    title: "OrchidXR",
-    desc: "Immersive AR experience honoring Seattle's Central District history. Built with Unity and 8th Wall for web-based augmented reality.",
-    tech: ["Unity", "AR", "8th Wall"],
-    link: "https://github.com/eileendong/orchidxr",
-    glow: "from-cyan-500/0 via-cyan-500/0 to-cyan-500/10",
-    shadow: "hover:shadow-cyan-400/20",
-  },
-  {
-    icon: <Server className="w-8 h-8 text-emerald-300" />,
-    title: "Bare Metal Provisioning",
-    desc: "Automated Windows workstation deployment replacing 4-hour manual setup with 20-minute Ansible playbooks. Reduced configuration errors by 95%.",
-    tech: ["Ansible", "DevOps", "WinRM"],
-    link: "https://github.com/eileendong/UW-bare-metal-provisioning",
-    glow: "from-emerald-500/0 via-emerald-500/0 to-emerald-500/10",
-    shadow: "hover:shadow-emerald-400/20",
+    period: "Summer 2023",
+    role: "Software Engineer Intern",
+    company: "Southwest Research Institute",
+    companyUrl: "https://www.swri.org",
+    location: "San Antonio, TX",
+    description:
+      "Rewrote a CLI fluid thermodynamics simulator as a React GUI with CSV export, cutting engine test setup from minutes to seconds for 40+ engineers. Refactored Visual Basic data visualization pipelines.",
+    tech: ["React", "Python", "Data Visualization"],
   },
 ];
 
-// Filter categories
-const filterCategories = ["All", "React", "AWS", "Python", "DevOps"];
+// Projects data
+const projects = [
+  {
+    title: "Automated Windows Workstation Deployment",
+    description:
+      "Built an Ansible-driven Windows deployment system integrating with MDT/WDS PXE, eliminating 20+ manual steps. Automated installation of 20+ enterprise applications with checkpoint-based recovery.",
+    tech: ["Ansible", "PowerShell", "WinRM", "IaC"],
+    github: "https://github.com/eileendong/bare-metal-provisioning",
+    year: "2026",
+  },
+  {
+    title: "Roomies",
+    description:
+      "React + AWS Amplify expense-splitting app with Cognito Auth, Lambda, Textract for receipt scanning, S3, and DynamoDB. Real-time sync via POST APIs and event triggers.",
+    tech: ["React", "AWS", "Lambda", "DynamoDB"],
+    github: "https://github.com/eileendong/roomies",
+    year: "2025",
+  },
+  {
+    title: "Dub-Grind",
+    description:
+      "AI Discord bot using LangChain, LlamaIndex, and OpenAI that summarizes lectures, generates adaptive quizzes, and delivers real-time interactive feedback.",
+    tech: ["Python", "LangChain", "LlamaIndex", "OpenAI"],
+    github: "https://github.com/eileendong/dub-grind2",
+    year: "2025",
+  },
+];
 
-// Particle colors
-const particleColors = ["#60a5fa", "#a78bfa", "#34d399", "#f472b6", "#fbbf24", "#22d3ee"];
+// Skills organized by category
+const skillCategories = [
+  {
+    name: "Languages",
+    skills: ["Python", "Java", "JavaScript", "C", "C++", "SQL", "Bash", "HTML", "CSS"],
+  },
+  {
+    name: "Backend & APIs",
+    skills: ["FastAPI", "REST APIs", "Node.js", "Pydantic", "SQLite", "OAuth 2.0"],
+  },
+  {
+    name: "DevOps & CI/CD",
+    skills: ["Docker", "Kubernetes", "Ansible", "Terraform", "GitLab CI/CD", "Prometheus", "OpenTelemetry", "Grafana"],
+  },
+  {
+    name: "Cloud & Infrastructure",
+    skills: ["AWS (EC2, Lambda, S3, DynamoDB, Cognito)", "Linux", "PowerShell", "TCP/IP Networking"],
+  },
+  {
+    name: "Frameworks & Tools",
+    skills: ["React.js", "LangChain", "LlamaIndex", "Git", "Postman", "Agile/Scrum"],
+  },
+];
 
-// Particle component for the silly effect
-const Particle = ({ style, color }: { style: React.CSSProperties; color: string }) => {
-  const angle = Math.random() * Math.PI * 2;
-  const distance = 50 + Math.random() * 80;
-  const size = 6 + Math.random() * 8;
-
-  return (
-    <motion.div
-      initial={{ opacity: 1, scale: 0, x: 0, y: 0 }}
-      animate={{
-        opacity: 0,
-        scale: [0, 1.5, 0.5],
-        x: Math.cos(angle) * distance,
-        y: Math.sin(angle) * distance,
-      }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      style={{
-        position: "fixed",
-        width: size,
-        height: size,
-        borderRadius: "50%",
-        background: color,
-        boxShadow: `0 0 ${size}px ${color}`,
-        pointerEvents: "none",
-        zIndex: 9999,
-        ...style,
-      }}
-    />
-  );
-};
+// Navigation items
+const navItems = ["About", "Experience", "Projects", "Skills", "Contact"];
 
 export default function App() {
-  // Mobile menu state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("about");
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // Project filter state
-  const [activeFilter, setActiveFilter] = useState("All");
+  // Track mouse position for spotlight effect
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
-  // Particles state for silly effect
-  const [particles, setParticles] = useState<{ id: number; x: number; y: number; color: string }[]>([]);
+  // Track active section for navigation highlight
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
 
-  // Silly button effect - spawns confetti particles
-  const doSillyEffect = (e: React.MouseEvent) => {
-    const rect = (e.target as HTMLElement).getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
+    navItems.forEach((item) => {
+      const element = document.getElementById(item.toLowerCase());
+      if (element) observer.observe(element);
+    });
 
-    // Create particles
-    const newParticles = Array.from({ length: 20 }, (_, i) => ({
-      id: Date.now() + i,
-      x: centerX,
-      y: centerY,
-      color: particleColors[Math.floor(Math.random() * particleColors.length)],
-    }));
-
-    setParticles((prev) => [...prev, ...newParticles]);
-
-    // Clean up particles after animation
-    setTimeout(() => {
-      setParticles((prev) => prev.filter((p) => !newParticles.find((np) => np.id === p.id)));
-    }, 800);
-  };
-
-  // Filter projects based on active filter
-  const filteredProjects = activeFilter === "All"
-    ? projects
-    : projects.filter(p =>
-        p.tech.some(t => t.toLowerCase().includes(activeFilter.toLowerCase()))
-      );
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      {/* Particles for silly button effect */}
-      <AnimatePresence>
-        {particles.map((particle) => (
-          <Particle key={particle.id} style={{ left: particle.x, top: particle.y }} color={particle.color} />
-        ))}
-      </AnimatePresence>
+    <div className="relative min-h-screen bg-slate-900 text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900">
+      {/* Gradient spotlight that follows cursor */}
+      <div
+        className="pointer-events-none fixed inset-0 z-30 transition duration-300 lg:absolute"
+        style={{
+          background: `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`,
+        }}
+      />
 
-      {/* Skip to content link for accessibility */}
+      {/* Skip to content link */}
       <a
-        href="#main-content"
-        className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg"
+        href="#about"
+        className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-teal-400 focus:text-slate-900 focus:rounded-lg focus:font-semibold"
       >
         Skip to content
       </a>
 
-      <div className="fixed inset-0 -z-10">
-        <OceanNightBackground />
-      </div>
+      <div className="mx-auto min-h-screen max-w-screen-xl px-6 py-12 md:px-12 md:py-20 lg:px-24 lg:py-0">
+        <div className="lg:flex lg:justify-between lg:gap-4">
+          {/* Left Column - Fixed Info */}
+          <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24">
+            <div>
+              <h1 className="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">
+                <a href="/">Eileen Dong</a>
+              </h1>
+              <h2 className="mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl">
+                Software Engineer
+              </h2>
+              <p className="mt-4 max-w-xs leading-normal text-slate-400">
+                I build reliable infrastructure, ship production systems, and turn complex problems into elegant solutions.
+              </p>
 
-      {/* === NAVIGATION === */}
-      <nav className="flex justify-between items-center p-6 sticky top-0 z-50 nav-bg border-b border-white/10">
-        <div className="font-semibold text-white tracking-wide">EILEEN DONG</div>
-
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-6 text-sm items-center">
-          {["Projects", "Skills", "Experience", "Education", "Contact"].map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
-              className="nav-link text-white/70 hover:text-white transition"
-            >
-              {link}
-            </a>
-          ))}
-          <button
-            onClick={doSillyEffect}
-            aria-label="Do something fun"
-            className="border border-white/20 px-3 py-2 rounded-full backdrop-blur-sm bg-white/10 hover:bg-white/20 hover:scale-110 transition-all flex items-center justify-center"
-          >
-            <Sparkles className="w-4 h-4 text-cyan-300" />
-          </button>
-        </div>
-
-        {/* Mobile Navigation Toggle */}
-        <div className="md:hidden flex items-center gap-3">
-          <button
-            onClick={doSillyEffect}
-            aria-label="Do something fun"
-            className="border border-white/20 p-2 rounded-full backdrop-blur-sm bg-white/10 hover:bg-white/20 hover:scale-110 transition-all"
-          >
-            <Sparkles className="w-4 h-4 text-cyan-300" />
-          </button>
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle navigation menu"
-            aria-expanded={mobileMenuOpen}
-            className="border border-white/20 p-2 rounded-lg backdrop-blur-sm bg-white/10 hover:bg-white/20 transition"
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-white" />}
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu Dropdown */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden sticky top-[73px] z-40 nav-bg border-b border-white/10 overflow-hidden"
-          >
-            <div className="flex flex-col p-4 space-y-3">
-              {["Projects", "Skills", "Experience", "Education", "Contact"].map((link) => (
-                <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="nav-link text-white/70 hover:text-white transition py-2 px-4 rounded-lg hover:bg-white/10"
-                >
-                  {link}
-                </a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* === HERO === */}
-      <section id="main-content" className="flex flex-col items-center justify-center text-center py-32 px-6 relative">
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl sm:text-5xl md:text-6xl font-semibold leading-snug md:leading-[1.15] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-blue-300 via-cyan-200 to-purple-400 pb-2"
-        >
-          Exploring, Learning
-          <br />
-          Figuring it out.
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="text-white/70 max-w-2xl mt-8 mb-8 leading-relaxed text-lg"
-        >
-          Studying Computer Science @ University of Washington '27 -- happy to see you!!
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="flex flex-wrap justify-center gap-4"
-        >
-          <a href="#projects" className="btn-glass">View Projects</a>
-          <a href="#contact" className="btn-glass">Contact Me</a>
-        </motion.div>
-      </section>
-
-      {/* === PROJECTS === */}
-      <section id="projects" className="flex flex-col items-center justify-center px-6 md:px-12 py-24">
-        <h2 className="text-3xl font-semibold mb-8 text-center section-title">Featured Projects</h2>
-
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {filterCategories.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`px-4 py-2 rounded-full text-sm transition-all duration-300 ${
-                activeFilter === filter
-                  ? "bg-blue-500/30 text-white border border-blue-400/50"
-                  : "bg-white/5 text-white/70 border border-white/10 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full justify-items-center">
-          {filteredProjects.map((p) => (
-            <motion.div
-              key={p.title}
-              layout
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              whileHover={{ scale: 1.04 }}
-              transition={{ type: "spring", stiffness: 260, damping: 18 }}
-              className={`group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/[0.07] to-white/[0.02] backdrop-blur-2xl border border-white/[0.08] p-8 text-center shadow-xl ${p.shadow} hover:border-white/20 transition-all duration-500 w-full max-w-sm`}
-            >
-              <div className={`absolute inset-0 bg-gradient-to-br ${p.glow} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
-              <div className="relative z-10 space-y-4">
-                <div className="flex justify-center">{p.icon}</div>
-                <h3 className="text-white text-2xl font-semibold">{p.title}</h3>
-                <p className="text-white/70 text-sm leading-relaxed">{p.desc}</p>
-                <div className="flex flex-wrap justify-center gap-2 pt-2">
-                  {p.tech.map((t, j) => (
-                    <span key={j} className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white/90 text-xs font-medium">
-                      {t}
-                    </span>
+              {/* Desktop Navigation */}
+              <nav className="nav hidden lg:block" aria-label="In-page jump links">
+                <ul className="mt-16 w-max">
+                  {navItems.map((item) => (
+                    <li key={item}>
+                      <a
+                        href={`#${item.toLowerCase()}`}
+                        className={`group flex items-center py-3 ${
+                          activeSection === item.toLowerCase() ? "active" : ""
+                        }`}
+                      >
+                        <span
+                          className={`nav-indicator mr-4 h-px transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none ${
+                            activeSection === item.toLowerCase()
+                              ? "w-16 bg-slate-200"
+                              : "w-8 bg-slate-600"
+                          }`}
+                        />
+                        <span
+                          className={`nav-text text-xs font-bold uppercase tracking-widest group-hover:text-slate-200 group-focus-visible:text-slate-200 ${
+                            activeSection === item.toLowerCase()
+                              ? "text-slate-200"
+                              : "text-slate-500"
+                          }`}
+                        >
+                          {item}
+                        </span>
+                      </a>
+                    </li>
                   ))}
-                </div>
-              </div>
-              <div className="mt-6 relative z-10 flex justify-center gap-4">
+                </ul>
+              </nav>
+            </div>
+
+            {/* Social Links */}
+            <ul className="ml-1 mt-8 flex items-center gap-5" aria-label="Social media">
+              <li>
                 <a
-                  href={p.link}
+                  href="https://github.com/eileendong"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm text-white/80 hover:text-white hover:underline transition-all py-2"
+                  className="block hover:text-slate-200 transition-colors"
+                  aria-label="GitHub (opens in new tab)"
                 >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  GitHub
+                  <Github className="h-6 w-6" />
                 </a>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/eileen-dong-459187136/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block hover:text-slate-200 transition-colors"
+                  aria-label="LinkedIn (opens in new tab)"
+                >
+                  <Linkedin className="h-6 w-6" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:eileendong1@gmail.com"
+                  className="block hover:text-slate-200 transition-colors"
+                  aria-label="Email"
+                >
+                  <Mail className="h-6 w-6" />
+                </a>
+              </li>
+            </ul>
+          </header>
 
-
-
-{/* ================= SKILLS SECTION (Lucide Icons + 5-STAR SYSTEM) ================= */}
-<section
-  id="skills"
-  className="relative px-6 md:px-12 py-32 backdrop-blur-sm"
->
-  <h2 className="text-4xl font-semibold mb-8 text-center tracking-tight bg-gradient-to-br from-blue-300 via-cyan-200 to-purple-400 text-transparent bg-clip-text">
-    Technical Skills
-  </h2>
-
-  {/* Skills Legend */}
-  <div className="flex justify-center gap-6 mb-12 text-sm text-white/60">
-    <div className="flex items-center gap-2">
-      <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-blue-400">★★★★★</span>
-      <span>Expert</span>
-    </div>
-    <div className="flex items-center gap-2">
-      <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-blue-400">★★★★</span><span className="text-gray-600">★</span>
-      <span>Advanced</span>
-    </div>
-    <div className="flex items-center gap-2">
-      <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-blue-400">★★★</span><span className="text-gray-600">★★</span>
-      <span>Proficient</span>
-    </div>
-  </div>
-
-  <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-14">
-    {[
-      {
-        category: "Languages",
-        items: [
-          { icon: <FileCode size={16} className="text-blue-300" />, name: "Python", level: 5 },
-          { icon: <Braces size={16} className="text-blue-300" />, name: "C/C++", level: 5 },
-          { icon: <Coffee size={16} className="text-blue-300" />, name: "Java", level: 5 },
-          { icon: <Code size={16} className="text-blue-300" />, name: "JavaScript", level: 4 },
-          { icon: <Database size={16} className="text-blue-300" />, name: "SQL", level: 3 },
-          { icon: <Layout size={16} className="text-blue-300" />, name: "HTML/CSS", level: 4 },
-          { icon: <Terminal size={16} className="text-blue-300" />, name: "Visual Basic", level: 3 },
-        ],
-      },
-      {
-        category: "Frameworks & Libraries",
-        items: [
-          { icon: <Rocket size={16} className="text-purple-300" />, name: "React", level: 4 },
-          { icon: <Rocket size={16} className="text-purple-300" />, name: "FastAPI", level: 5 },
-          { icon: <Workflow size={16} className="text-purple-300" />, name: "LangChain", level: 4 },
-          { icon: <Layers size={16} className="text-purple-300" />, name: "LlamaIndex", level: 3 },
-          { icon: <Server size={16} className="text-purple-300" />, name: "Node.js", level: 3 },
-        ],
-      },
-      {
-        category: "DevOps & Cloud",
-        items: [
-          { icon: <Boxes size={16} className="text-cyan-300" />, name: "Docker", level: 3 },
-          { icon: <Network size={16} className="text-cyan-300" />, name: "Kubernetes", level: 3 },
-          { icon: <Cloud size={16} className="text-cyan-300" />, name: "AWS", level: 4 },
-          { icon: <GitBranch size={16} className="text-cyan-300" />, name: "GitLab CI/CD", level: 5 },
-          { icon: <Wrench size={16} className="text-cyan-300" />, name: "Ansible", level: 3 },
-          { icon: <Terminal size={16} className="text-cyan-300" />, name: "Linux", level: 4 },
-        ],
-      },
-      {
-        category: "Concepts & Systems",
-        items: [
-          { icon: <Network size={16} className="text-teal-300" />, name: "APIs", level: 5 },
-          { icon: <Cpu size={16} className="text-teal-300" />, name: "Concurrent Programming", level: 4 },
-          { icon: <Server size={16} className="text-teal-300" />, name: "Distributed Systems", level: 4 },
-          { icon: <Cable size={16} className="text-teal-300" />, name: "TCP Socket Programming", level: 3 },
-          { icon: <Gauge size={16} className="text-teal-300" />, name: "Observability (Prometheus, OTel)", level: 4 },
-        ],
-      },
-    ].map((cat, i) => (
-      <motion.div
-        key={i}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: i * 0.2 }}
-        className="space-y-6"
-      >
-        <h3 className="text-xl font-medium mb-6 text-white/80 flex items-center gap-2">
-          <Layers size={18} className="text-blue-400" /> {cat.category}
-        </h3>
-        {cat.items.map((skill, s) => (
-          <div
-            key={s}
-            className="flex items-center justify-between group transition-transform duration-300 hover:translate-x-1"
-          >
-            <span className="text-gray-200 text-sm flex items-center gap-2">
-              {skill.icon}
-              {skill.name}
-            </span>
-
-            {/* Star Rating */}
-            <div className="flex space-x-[2px]">
-              {[...Array(5)].map((_, starIndex) => {
-                const filled = starIndex < skill.level;
-                return (
-                  <motion.span
-                    key={starIndex}
-                    className={`text-lg ${
-                      filled
-                        ? "text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-blue-400"
-                        : "text-gray-600"
-                    }`}
-                  >
-                    ★
-                  </motion.span>
-                );
-              })}
+          {/* Mobile Navigation */}
+          <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+            <div className="flex items-center justify-between px-6 py-4">
+              <span className="font-bold text-slate-200">ED</span>
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
+                aria-label="Toggle menu"
+                aria-expanded={mobileMenuOpen}
+              >
+                {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </button>
             </div>
+
+            <AnimatePresence>
+              {mobileMenuOpen && (
+                <motion.nav
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="border-t border-slate-800 overflow-hidden"
+                >
+                  <ul className="py-4 px-6 space-y-2">
+                    {navItems.map((item) => (
+                      <li key={item}>
+                        <a
+                          href={`#${item.toLowerCase()}`}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="block py-2 text-slate-400 hover:text-slate-200 transition-colors"
+                        >
+                          {item}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.nav>
+              )}
+            </AnimatePresence>
           </div>
-        ))}
-      </motion.div>
-    ))}
-  </div>
-</section>
 
-{/* 🌊 Experience Section */}
-<section id="experience" className="relative py-32 px-6 md:px-12 overflow-hidden">
-  <h2 className="text-3xl font-semibold mb-20 text-center text-white tracking-wide">
-    Experience
-  </h2>
+          {/* Right Column - Main Content */}
+          <main id="content" className="pt-24 lg:w-1/2 lg:py-24">
+            {/* About Section */}
+            <section
+              id="about"
+              className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+              aria-label="About me"
+            >
+              <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                <h2 className="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">
+                  About
+                </h2>
+              </div>
 
-  {/* Wavy timeline path */}
-  <svg
-    className="absolute left-1/2 -translate-x-1/2 top-0 h-full w-[4px]"
-    viewBox="0 0 10 1000"
-    preserveAspectRatio="none"
-  >
-    <defs>
-      <linearGradient id="waveLine" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.7" />
-        <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.3" />
-      </linearGradient>
-    </defs>
-    <path
-      d="M5 0 C8 100, 2 200, 5 300 S8 500, 5 700 S2 900, 5 1000"
-      stroke="url(#waveLine)"
-      strokeWidth="1.5"
-      fill="none"
-      className="animate-[waveFlow_6s_ease-in-out_infinite_alternate]"
-    />
-  </svg>
+              <div className="space-y-4">
+                <p>
+                  I&apos;m a software engineer passionate about building <span className="text-slate-200 font-medium">reliable systems at scale</span>. 
+                  Currently studying Computer Science at the <span className="text-slate-200 font-medium">University of Washington</span>, 
+                  I specialize in DevOps, backend development, and cloud infrastructure.
+                </p>
 
-  {/* Rising bubbles */}
-  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    {Array.from({ length: 10 }).map((_, i) => (
-      <div
-        key={i}
-        className="absolute w-2 h-2 bg-cyan-300/40 rounded-full blur-[1px]"
-        style={{
-          left: `${45 + Math.sin(i * 2) * 5}%`,
-          animation: `bubbleRise ${6 + i * 1.5}s linear ${i * 1}s infinite`,
-          top: `${100 + i * 150}px`,
-        }}
-      ></div>
-    ))}
-  </div>
+                <p>
+                  This summer, I&apos;m joining <a href="https://www.axon.com" className="font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 transition-colors" target="_blank" rel="noopener noreferrer">Axon</a> as 
+                  a DevOps Platform intern, where I&apos;ll be building zero-touch automation for infrastructure provisioning. 
+                  Previously at <a href="https://www.heb.com" className="font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 transition-colors" target="_blank" rel="noopener noreferrer">H-E-B</a>, 
+                  I shipped a FastAPI microservice handling alerts across 13,000+ servers with 99% delivery reliability.
+                </p>
 
-  <div className="relative max-w-5xl mx-auto space-y-20">
-    {
-      [
-  {
-    icon: <ServerCog className="w-5 h-5 text-cyan-400" />,
-    role: "Software Engineer Intern",
-    company: "H-E-B",
-    time: "Summer 2025",
-    desc: "Built FastAPI backend replacing legacy Dell OME alerting, reducing alert latency by 60%. Deployed Dockerized stack to Kubernetes with Prometheus observability serving 500+ retail locations.",
-  },
-  {
-    icon: <Laptop className="w-5 h-5 text-blue-300" />,
-    role: "Student IT Technician",
-    company: "University of Washington",
-    time: "Jan 2024 – Present",
-    desc: "Resolved 50+ support tickets monthly across Windows, macOS, and Linux. Streamlined device imaging workflows reducing setup time by 30%.",
-  },
-  {
-    icon: <Code2 className="w-5 h-5 text-purple-300" />,
-    role: "Software Development Intern",
-    company: "Southwest Research Institute",
-    time: "Summer 2023",
-    desc: "Modernized legacy Fortran simulation system into React dashboard, enabling real-time data visualization for 20+ researchers.",
-  },
-  {
-    icon: <FileText className="w-5 h-5 text-teal-300" />,
-    role: "Administration Intern",
-    company: "Southwest Research Institute",
-    time: "Summer 2022",
-    desc: "Digitized 1000+ aerospace documents for NASA's New Horizons and Juno missions. Shadowed Python calibration work for Europa Clipper.",
-  },
-  {
-    icon: <Palette className="w-5 h-5 text-pink-300" />,
-    role: "Product & Development Intern",
-    company: "USAA",
-    time: "Summer 2021",
-    desc: "Designed and developed mock UI for small business insurance platform, conducting user testing with 15+ stakeholders.",
-  },
-  {
-    icon: <Coffee className="w-5 h-5 text-amber-300" />,
-    role: "Boba Barista",
-    company: "Hella Bubble",
-    time: "Summer 2021 – 2024",
-    desc: "Served 100+ customers daily while managing inventory and training 5 new team members.",
-  },
-].map((exp, i) => (
-      <motion.div
-        key={i}
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: i * 0.1 }}
-        viewport={{ once: true }}
-        className={`relative w-full md:w-[48%] ${
-          i % 2 === 0 ? "ml-auto text-left" : "mr-auto text-right"
-        }`}
-      >
-        <div
-          className={`relative bg-white/[0.05] border border-white/[0.1] backdrop-blur-2xl rounded-2xl p-6 shadow-lg shadow-cyan-500/5 transition-all hover:scale-[1.02] hover:shadow-cyan-400/20 ${
-            i % 2 === 0 ? "md:ml-10" : "md:mr-10"
-          }`}
-        >
-          <h3 className="text-xl font-semibold text-white">
-            {exp.role} <span className="text-blue-300">| {exp.company}</span>
-          </h3>
-          <p className="text-sm text-white/60 mt-1">{exp.time}</p>
-          <p className="text-white/70 mt-3 leading-relaxed">{exp.desc}</p>
+                <p>
+                  When I&apos;m not writing code, you can find me exploring Seattle&apos;s coffee shops, 
+                  contributing to robotics projects, or working on AI-powered tools that make learning more accessible.
+                </p>
+              </div>
+            </section>
 
-          {/* Connection dot */}
-          <div
-            className={`absolute top-1/2 w-3 h-3 rounded-full bg-cyan-400/70 border border-cyan-200/30 shadow-[0_0_15px_rgba(34,211,238,0.6)] ${
-              i % 2 === 0 ? "-left-[30px]" : "-right-[30px]"
-            }`}
-          ></div>
+            {/* Experience Section */}
+            <section
+              id="experience"
+              className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+              aria-label="Work experience"
+            >
+              <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                <h2 className="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">
+                  Experience
+                </h2>
+              </div>
+
+              <div>
+                <ol className="group/list">
+                  {experiences.map((exp, index) => (
+                    <li key={index} className="mb-12">
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                        className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"
+                      >
+                        <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg" />
+
+                        <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">
+                          {exp.period}
+                        </header>
+
+                        <div className="z-10 sm:col-span-6">
+                          <h3 className="font-medium leading-snug text-slate-200">
+                            <div>
+                              <a
+                                href={exp.companyUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base"
+                              >
+                                <span className="absolute -inset-x-4 -inset-y-2.5 hidden rounded md:-inset-x-6 md:-inset-y-4 lg:block" />
+                                <span>
+                                  {exp.role} ·{" "}
+                                  <span className="inline-block">
+                                    {exp.company}
+                                    <ArrowUpRight className="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px" />
+                                  </span>
+                                </span>
+                              </a>
+                            </div>
+                            <div className="text-slate-500 text-sm flex items-center gap-1 mt-1">
+                              <MapPin className="h-3 w-3" />
+                              {exp.location}
+                            </div>
+                          </h3>
+
+                          <p className="mt-2 text-sm leading-normal">{exp.description}</p>
+
+                          <ul className="mt-2 flex flex-wrap gap-2" aria-label="Technologies used">
+                            {exp.tech.map((t) => (
+                              <li key={t}>
+                                <div className="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                  {t}
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </motion.div>
+                    </li>
+                  ))}
+                </ol>
+
+                <div className="mt-12">
+                  <a
+                    href="/Eileen_Dong_Resume.pdf"
+                    className="inline-flex items-center font-medium leading-tight text-slate-200 group"
+                  >
+                    <span className="border-b border-transparent pb-px transition group-hover:border-teal-300 motion-reduce:transition-none">
+                      View Full Résumé
+                    </span>
+                    <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-2 motion-reduce:transition-none" />
+                  </a>
+                </div>
+              </div>
+            </section>
+
+            {/* Projects Section */}
+            <section
+              id="projects"
+              className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+              aria-label="Selected projects"
+            >
+              <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                <h2 className="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">
+                  Projects
+                </h2>
+              </div>
+
+              <div>
+                <ul className="group/list">
+                  {projects.map((project, index) => (
+                    <li key={index} className="mb-12">
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                        className="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"
+                      >
+                        <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg" />
+
+                        <div className="z-10 sm:order-2 sm:col-span-6">
+                          <h3>
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base"
+                            >
+                              <span className="absolute -inset-x-4 -inset-y-2.5 hidden rounded md:-inset-x-6 md:-inset-y-4 lg:block" />
+                              <span>
+                                {project.title}
+                                <ExternalLink className="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px" />
+                              </span>
+                            </a>
+                          </h3>
+
+                          <p className="mt-2 text-sm leading-normal">{project.description}</p>
+
+                          <ul className="mt-2 flex flex-wrap gap-2" aria-label="Technologies used">
+                            {project.tech.map((t) => (
+                              <li key={t}>
+                                <div className="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                                  {t}
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="z-10 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2 sm:order-1">
+                          {project.year}
+                        </div>
+                      </motion.div>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-12">
+                  <a
+                    href="https://github.com/eileendong"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center font-medium leading-tight text-slate-200 group"
+                  >
+                    <span className="border-b border-transparent pb-px transition group-hover:border-teal-300 motion-reduce:transition-none">
+                      View All Projects on GitHub
+                    </span>
+                    <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-2 motion-reduce:transition-none" />
+                  </a>
+                </div>
+              </div>
+            </section>
+
+            {/* Skills Section */}
+            <section
+              id="skills"
+              className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+              aria-label="Technical skills"
+            >
+              <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                <h2 className="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">
+                  Skills
+                </h2>
+              </div>
+
+              <div className="space-y-8">
+                {skillCategories.map((category, index) => (
+                  <motion.div
+                    key={category.name}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <h3 className="text-sm font-semibold text-slate-200 mb-3">{category.name}</h3>
+                    <ul className="flex flex-wrap gap-2" aria-label={`${category.name} skills`}>
+                      {category.skills.map((skill) => (
+                        <li key={skill}>
+                          <div className="flex items-center rounded-full bg-slate-800/80 px-3 py-1 text-xs font-medium leading-5 text-slate-300 border border-slate-700/50 hover:bg-slate-700/50 hover:border-slate-600 transition-colors">
+                            {skill}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                ))}
+              </div>
+            </section>
+
+            {/* Contact Section */}
+            <section
+              id="contact"
+              className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+              aria-label="Contact"
+            >
+              <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+                <h2 className="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">
+                  Contact
+                </h2>
+              </div>
+
+              <div className="space-y-4">
+                <p>
+                  I&apos;m currently looking for <span className="text-slate-200 font-medium">new grad opportunities</span> starting 
+                  Summer 2027. If you&apos;re hiring software engineers with experience in DevOps, backend systems, or cloud 
+                  infrastructure, I&apos;d love to chat.
+                </p>
+
+                <p>
+                  The best way to reach me is via email at{" "}
+                  <a
+                    href="mailto:eileendong1@gmail.com"
+                    className="font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 transition-colors"
+                  >
+                    eileendong1@gmail.com
+                  </a>
+                  . You can also find me on{" "}
+                  <a
+                    href="https://www.linkedin.com/in/eileen-dong-459187136/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 transition-colors"
+                  >
+                    LinkedIn
+                  </a>{" "}
+                  or{" "}
+                  <a
+                    href="https://github.com/eileendong"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 transition-colors"
+                  >
+                    GitHub
+                  </a>
+                  .
+                </p>
+              </div>
+            </section>
+
+            {/* Footer */}
+            <footer className="max-w-md pb-16 text-sm text-slate-500 sm:pb-0">
+              <p>
+                Loosely designed in{" "}
+                <a
+                  href="https://www.figma.com/"
+                  className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Figma
+                </a>{" "}
+                and coded in{" "}
+                <a
+                  href="https://code.visualstudio.com/"
+                  className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Visual Studio Code
+                </a>
+                . Built with{" "}
+                <a
+                  href="https://react.dev/"
+                  className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  React
+                </a>{" "}
+                and{" "}
+                <a
+                  href="https://tailwindcss.com/"
+                  className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Tailwind CSS
+                </a>
+                , deployed with{" "}
+                <a
+                  href="https://vercel.com/"
+                  className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Vercel
+                </a>
+                .
+              </p>
+            </footer>
+          </main>
         </div>
-      </motion.div>
-    ))}
-  </div>
-</section>
-
-{/* ================= EDUCATION SECTION ================= */}
-<section
-  id="education"
-  className="relative px-6 md:px-12 py-32 text-center overflow-hidden"
->
-  {/* Watermark */}
-  <div className="absolute inset-0 flex items-center justify-center opacity-[0.05]">
-    <span className="text-[15rem] font-bold text-white/5 select-none">
-      UW
-    </span>
-  </div>
-
-  <div className="relative z-10 max-w-3xl mx-auto">
-    <h2 className="text-4xl font-semibold mb-8 tracking-tight bg-gradient-to-r from-blue-300 via-cyan-200 to-purple-400 text-transparent bg-clip-text">
-      Education
-    </h2>
-
-    <p className="text-lg font-medium mb-2">
-      University of Washington – B.S. Computer Science
-    </p>
-    <p className="text-gray-400 text-sm mb-4">
-     GPA: 3.45 
-    </p>
-
-    <motion.p
-      animate={{
-        textShadow: [
-          "0 0 10px rgba(56,189,248,0.7)",
-          "0 0 20px rgba(56,189,248,1)",
-          "0 0 10px rgba(56,189,248,0.7)",
-        ],
-      }}
-      transition={{ duration: 2, repeat: Infinity, repeatType: "mirror" }}
-      className="text-blue-200"
-    >
-      Expected Graduation: June 2027
-    </motion.p>
-      
-    <p className="text-gray-400 mt-4 text-sm leading-relaxed">
-      Relevant Coursework: Data Structures & Parallelism, Algorithms, Distributed Systems,
-      Software Engineering, Computer Architecture, Discrete Math, Systems Programming, Probability & Statistics.
-    </p>
-  </div>
-</section>
-
-     
-      <section id="contact" className="px-12 py-24 text-center text-white">
-        <h2 className="text-4xl font-semibold mb-8">Talk to me!</h2>
-        <p className="text-white/60 mb-8">
-          <a href="mailto:eileendong1@gmail.com" className="underline hover:text-white transition"> eileendong1@gmail.com </a> • Seattle, WA • <a href="https://www.linkedin.com/in/eileen-dong-459187136/" className="underline hover:text-white transition">LinkedIn</a> • <a href="https://github.com/eileendong" className="underline hover:text-white transition">GitHub</a>
-        </p>
-        {/* <form
-          onSubmit={(e) => e.preventDefault()}
-          className="max-w-md mx-auto space-y-4"
-        >
-          <input
-            type="text"
-            placeholder="Your Name"
-            className="w-full p-3 rounded bg-white/10 border border-white/20"
-            required
-          />
-          <input
-            type="email"
-            placeholder="Your Email"
-            className="w-full p-3 rounded bg-white/10 border border-white/20"
-            required
-          />
-          <textarea
-            placeholder="Your Message"
-            rows={4}
-            className="w-full p-3 rounded bg-white/10 border border-white/20"
-            required
-          />
-          <button
-            type="submit"
-            className="w-full border border-white/20 px-6 py-2 rounded-full hover:bg-white hover:text-black transition"
-          >
-            Send Message
-          </button>
-        </form> */}
-      </section>
-      {/* === FOOTER === */}
-      <footer className="py-8 text-center text-white/50 text-sm border-t border-white/10">
-        © {new Date().getFullYear()} Eileen Dong • Built with React, Tailwind, & Framer Motion
-      </footer>
+      </div>
     </div>
-    
   );
 }
