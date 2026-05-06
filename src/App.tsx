@@ -178,7 +178,7 @@ export default function App() {
                 Software Engineer
               </h2>
               <p className="mt-4 max-w-xs leading-normal text-slate-400">
-                I’m most interested in the parts of software that support everything else: infrastructure, automation, and security.
+                I’m most interested in the parts of software that support everything else: infrastructure, automation, and security!
               </p>
 
               {/* Desktop Navigation */}
@@ -320,7 +320,7 @@ export default function App() {
                 </p>
 
                 <p>
-                  When I&apos;m not coding, you can find me playing with my cat Pebbles, exploring Seattle&apos;s farmers markets, 
+                  While I&apos;m not coding, you can find me playing with my cat Pebbles, exploring Seattle&apos;s farmers markets, 
                   or cooking way too much food for one person.
                 </p>
               </div>
@@ -541,7 +541,7 @@ export default function App() {
                 <p>
                   I&apos;m currently looking for <span className="text-slate-200 font-medium">new grad opportunities</span> starting 
                   Summer 2027. If you&apos;re hiring software engineers with experience in DevOps, backend systems, or cloud 
-                  infrastructure, I&apos;d love to chat.
+                  infrastructure, I&apos;d to get involved!
                 </p>
 
                 <p>
