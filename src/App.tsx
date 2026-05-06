@@ -334,18 +334,7 @@ export default function App() {
                   <p className="text-xs text-slate-500 mt-2">Pebbles ^^</p>
                 </div>
 
-                {/* Resume link */}
-                <div className="mt-6">
-                  <a
-                    href="/Eileen_Dong_Resume.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-medium text-slate-200 hover:text-teal-300 transition-colors"
-                  >
-                    <ExternalLink className="h-4 w-4" />
-                    View my resume
-                  </a>
-                </div>
+                
               </div>
             </section>
 
