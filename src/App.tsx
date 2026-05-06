@@ -323,6 +323,29 @@ export default function App() {
                   While I&apos;m not coding, you can find me playing with my cat Pebbles, exploring Seattle&apos;s farmers markets, 
                   or cooking way too much food for one person.
                 </p>
+
+                {/* Cat photo */}
+                <div className="mt-6">
+                  <img 
+                    src="/images/cat.jpg" 
+                    alt="Pebbles the cat being petted" 
+                    className="rounded-lg w-48 h-48 object-cover shadow-lg border border-slate-700/50"
+                  />
+                  <p className="text-xs text-slate-500 mt-2">Pebbles</p>
+                </div>
+
+                {/* Resume link */}
+                <div className="mt-6">
+                  <a
+                    href="/Eileen_Dong_Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-slate-200 hover:text-teal-300 transition-colors"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    View my resume
+                  </a>
+                </div>
               </div>
             </section>
 

@@ -1,0 +1,53 @@
+
+
+Eileen Dong 
+eileendong1@gmail.com  |  (210) 701-4261  |  Portfolio  |  LinkedIn  |  GitHub 
+EDUCATION 
+University of Washington  —  B.S. Computer Science
+  Expected June 2027
+ 
+Coursework: Distributed Systems, Computer Security, Database Systems, Software Engineering, Computer Architecture, Systems Programming, 
+Algorithm Analysis, Linear Algebra
+ 
+TECHNICAL SKILLS 
+Languages: Python, Java, JavaScript, C, C++, SQL, Bash, HTML, CSS 
+Backend & APIs: FastAPI, REST API Development, Node.js, Pydantic, SQLite, OAuth 2.0 
+DevOps & CI/CD: Docker, Kubernetes, Ansible, Terraform, GitLab CI/CD, Prometheus, OpenTelemetry, Grafana 
+Cloud & Infra: AWS (EC2, Lambda, S3, DynamoDB, Cognito, IAM, Amplify), Linux, PowerShell, TCP/IP Networking 
+Frameworks & Tools: React.js, LangChain, LlamaIndex, Git, Postman, Agile / Scrum 
+EXPERIENCE 
+Software Engineer Intern  —  Axon Seattle, WA ·  Summer 2026 
+• Incoming DevOps platform intern building a zero-touch DevOps application to automate end-to-end infrastructure provisioning and 
+deployment workflows at scale. 
+Software Engineer Intern  —  H-E-B Austin, TX  ·  Summer 2025 
+• Replaced a legacy Dell OME alerting pipeline with a FastAPI microservice across 13K+ servers, achieving 99% delivery reliability and 
+preventing $300K+ outage costs per incident. 
+• Containerized services with Docker and Kubernetes; automated CI/CD pipelines and wired Prometheus + OpenTelemetry 
+instrumentation into real-time Grafana dashboards. 
+• Migrated alert transport from SNMP/UDP to HTTP POST over TCP; implemented structured logging with Loguru and SQLite for 
+persistence and querying of 2K+ daily alerts. 
+Student IT Technician  —  University of Washington  Seattle, WA  ·  Jan 2024 – Present 
+• Resolved 400+ hardware/software issues across Windows, macOS, and Linux; automated imaging and inventory workflows, cutting 
+device setup time by 40%. 
+• Deployed and maintained lab infrastructure; trained 5 technicians and standardized documentation across classroom and faculty 
+systems. 
+Software Engineer Intern  —  Southwest Research Institute San Antonio, TX  ·  Summer 2023 
+• Rewrote a CLI fluid thermodynamics simulator as a React GUI with CSV export, cutting engine test setup from minutes to seconds 
+for 40+ engineers. 
+• Refactored Visual Basic data visualization pipelines to streamline analysis workflows, saving significant weekly engineering hours. 
+Research Intern  —  Southwest Research Institute San Antonio, TX  ·  Summer 2022 
+• Processed and digitized NASA mission telemetry (Europa Clipper); assisted Python-based sensor calibration testing. 
+PROJECTS & LEADERSHIP 
+Automated Windows Workstation Deployment Infrastructure (2026)   github.com/eileendong/bare-metal-provisioning 
+• Built an Ansible-driven Windows deployment system integrating with MDT/WDS PXE, eliminating 20+ manual steps. 
+• Automated installation/configuration of 20+ enterprise applications using IaC (Ansible, PowerShell, WinRM) and implemented 
+parallel provisioning with checkpoint-based recovery and version-controlled configuration management. 
+Roomies (2025)   github.com/eileendong/roomies 
+• React + AWS Amplify expense-splitting app; Cognito Auth, Lambda, Textract, S3, DynamoDB; real-time sync via POST APIs and event 
+triggers. 
+Dub-Grind (2025)   github.com/eileendong/dub-grind2 
+• AI Discord bot (LangChain, LlamaIndex, OpenAI) that summarizes lectures, generates adaptive quizzes, and delivers real-time 
+interactive feedback. 
+VP & Co-Founder — UNA-USA (2021–2023). Founded the first high-school UN Association chapter in Texas 
+BroncBotz Robotics (2022–2023)  —  Wrote autonomous Java logic for FRC competition robot; NTX StemGals 2022 finalists.
+ 
