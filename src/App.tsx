@@ -179,7 +179,7 @@ export default function App() {
                   className="w-48 h-48 rounded-full object-cover object-top border-2 border-slate-700 shadow-lg"
                 />
               </div>
-              
+
               <h1 className="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">
                 <a href="/">Eileen Dong</a>
               </h1>
@@ -197,23 +197,20 @@ export default function App() {
                     <li key={item}>
                       <a
                         href={`#${item.toLowerCase()}`}
-                        className={`group flex items-center py-3 ${
-                          activeSection === item.toLowerCase() ? "active" : ""
-                        }`}
+                        className={`group flex items-center py-3 ${activeSection === item.toLowerCase() ? "active" : ""
+                          }`}
                       >
                         <span
-                          className={`nav-indicator mr-4 h-px transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none ${
-                            activeSection === item.toLowerCase()
+                          className={`nav-indicator mr-4 h-px transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 motion-reduce:transition-none ${activeSection === item.toLowerCase()
                               ? "w-16 bg-slate-200"
                               : "w-8 bg-slate-600"
-                          }`}
+                            }`}
                         />
                         <span
-                          className={`nav-text text-xs font-bold uppercase tracking-widest group-hover:text-slate-200 group-focus-visible:text-slate-200 ${
-                            activeSection === item.toLowerCase()
+                          className={`nav-text text-xs font-bold uppercase tracking-widest group-hover:text-slate-200 group-focus-visible:text-slate-200 ${activeSection === item.toLowerCase()
                               ? "text-slate-200"
                               : "text-slate-500"
-                          }`}
+                            }`}
                         >
                           {item}
                         </span>
@@ -316,34 +313,34 @@ export default function App() {
 
               <div className="space-y-4">
                 <p>
-                  I&apos;m a software engineer passionate about building <span className="text-slate-200 font-medium">reliable systems at scale</span>. 
-                  Currently studying Computer Science at the <span className="text-slate-200 font-medium">University of Washington</span>, Class of 27, 
+                  I&apos;m a software engineer passionate about building <span className="text-slate-200 font-medium">reliable systems at scale</span>.
+                  Currently studying Computer Science at the <span className="text-slate-200 font-medium">University of Washington 2027</span>,
                   I specialize in DevOps, backend development, and cloud infrastructure.
                 </p>
 
                 <p>
-                  This summer, I&apos;m joining <a href="https://www.axon.com" className="font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 transition-colors" target="_blank" rel="noopener noreferrer">Axon</a> as 
-                  a DevOps Platform intern, where I&apos;ll be building zero-touch automation for infrastructure provisioning. 
-                  Previously at <a href="https://www.heb.com" className="font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 transition-colors" target="_blank" rel="noopener noreferrer">H-E-B</a>, 
+                  This summer, I&apos;m joining <a href="https://www.axon.com" className="font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 transition-colors" target="_blank" rel="noopener noreferrer">Axon</a> as
+                  a DevOps Platform intern, where I&apos;ll be building zero-touch automation for infrastructure provisioning.
+                  Previously at <a href="https://www.heb.com" className="font-medium text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 transition-colors" target="_blank" rel="noopener noreferrer">H-E-B</a>,
                   I shipped a FastAPI microservice handling alerts across 13,000+ servers with 99% delivery reliability.
                 </p>
 
                 <p>
-                  While I&apos;m not coding, you can find me playing with my cat Pebbles, exploring Seattle&apos;s farmers markets, 
+                  While I&apos;m not coding, you can find me playing with my cat Pebbles, exploring Seattle&apos;s farmers markets,
                   or cooking way too much food for one person.
                 </p>
 
                 {/* Cat photo */}
                 <div className="mt-6">
-                  <img 
-                    src="/images/cat.jpg" 
-                    alt="Pebbles the cat being petted" 
+                  <img
+                    src="/images/cat.jpg"
+                    alt="Pebbles the cat being petted"
                     className="rounded-lg w-48 h-48 object-cover shadow-lg border border-slate-700/50"
                   />
                   <p className="text-xs text-slate-500 mt-2">Pebbles ^^</p>
                 </div>
 
-                
+
               </div>
             </section>
 
@@ -562,8 +559,8 @@ export default function App() {
 
               <div className="space-y-4">
                 <p>
-                  I&apos;m currently looking for <span className="text-slate-200 font-medium">new grad opportunities</span> starting 
-                  Summer 2027. If you&apos;re hiring software engineers with experience in DevOps, backend systems, or cloud 
+                  I&apos;m currently looking for <span className="text-slate-200 font-medium">new grad opportunities</span> starting
+                  Summer 2027. If you&apos;re hiring software engineers with experience in DevOps, backend systems, or cloud
                   infrastructure, I&apos;d to get involved!
                 </p>
 
