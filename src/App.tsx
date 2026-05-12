@@ -171,6 +171,15 @@ export default function App() {
           {/* Left Column - Fixed Info */}
           <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24">
             <div>
+              {/* Profile Photo */}
+              <div className="mb-6">
+                <img
+                  src="/eileen-photo.jpeg"
+                  alt="Eileen Dong"
+                  className="w-32 h-32 rounded-full object-cover border-2 border-slate-700 shadow-lg"
+                />
+              </div>
+              
               <h1 className="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">
                 <a href="/">Eileen Dong</a>
               </h1>
