@@ -176,7 +176,7 @@ export default function App() {
                 <img
                   src="/eileen-photo.jpeg"
                   alt="Eileen Dong"
-                  className="w-32 h-32 rounded-full object-cover border-2 border-slate-700 shadow-lg"
+                  className="w-48 h-48 rounded-full object-cover object-top border-2 border-slate-700 shadow-lg"
                 />
               </div>
               
