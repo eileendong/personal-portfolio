@@ -2,154 +2,467 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ================================================
-   ✨ GLOBAL STYLING — Slate/Teal Professional Theme
-   ================================================ */
-
-html {
-  scroll-behavior: smooth;
+/* Authentic Windows 95 UI font (W95FA — SIL OFL, self-hosted) */
+@font-face {
+  font-family: "W95FA";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("W95FA"), url("/fonts/W95FA.woff") format("woff");
 }
 
+/* ================================================
+   WINDOWS 98 DESKTOP  (98.css supplies window chrome)
+   ================================================ */
+
+:root {
+  --w95-font: "W95FA", "MS Sans Serif", Tahoma, Geneva, sans-serif;
+}
+
+html,
 body {
-  @apply text-slate-400 font-sans overflow-x-hidden;
-  background-color: #0f172a;
-  min-height: 100vh;
-}
-
-/* Selection styling */
-::selection {
-  background-color: rgba(45, 212, 191, 0.3);
-  color: #f1f5f9;
-}
-
-/* ================================================
-   📌 NAVIGATION STYLES
-   ================================================ */
-
-/* Navigation indicator line animation */
-.nav-indicator {
-  transition: width 0.25s ease, background-color 0.25s ease;
-}
-
-/* Navigation text */
-.nav-text {
-  transition: color 0.25s ease;
-}
-
-/* ================================================
-   🎯 FOCUS STATES & ACCESSIBILITY
-   ================================================ */
-
-/* Skip to content link */
-.skip-link {
-  position: absolute;
-  top: -100%;
-  left: 0;
-  z-index: 9999;
-  padding: 1rem 1.5rem;
-  background: #2dd4bf;
-  color: #0f172a;
-  font-weight: 600;
-  border-radius: 0 0 0.5rem 0;
-  transition: top 0.3s ease;
-}
-
-.skip-link:focus {
-  top: 0;
-  outline: 2px solid #f1f5f9;
-  outline-offset: 2px;
-}
-
-/* Screen reader only utility */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-.sr-only:focus,
-.sr-only:active {
-  position: static;
-  width: auto;
-  height: auto;
-  padding: 0;
   margin: 0;
-  overflow: visible;
-  clip: auto;
-  white-space: normal;
+  padding: 0;
+  height: 100%;
+  background: #008080; /* teal desktop */
+  overflow: hidden; /* the desktop itself doesn't scroll */
+  font-family: var(--w95-font);
 }
 
-/* Focus visible states for keyboard navigation */
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid #2dd4bf;
-  outline-offset: 2px;
-  border-radius: 4px;
+/* Use the Windows 95 font everywhere, overriding 98.css's pixel font */
+body,
+button,
+input,
+select,
+textarea,
+.title-bar-text,
+.window,
+.window-body,
+fieldset,
+legend,
+summary,
+.tree-view,
+.start-menu,
+.taskbar {
+  font-family: var(--w95-font) !important;
+}
+
+#root {
+  height: 100%;
+}
+
+/* Desktop working area (above the taskbar) */
+.desktop {
+  position: absolute;
+  inset: 0 0 40px 0;
+  overflow: hidden;
+}
+
+/* A window: absolutely placed, draggable on desktop; 98.css styles the chrome */
+.win {
+  position: absolute;
+  max-width: calc(100vw - 16px);
+}
+
+.win .title-bar {
+  cursor: default;
+  user-select: none;
+}
+
+/* Scrollable body inside a window */
+.win-body-scroll {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Sunken image frame (like a Win98 inset) */
+.inset {
+  border: 2px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  padding: 2px;
+  background: #fff;
+}
+
+/* ---- Desktop icons ---- */
+.desk-icons {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  z-index: 1;
+}
+.desk-icon {
+  width: 74px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  gap: 4px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 1px dotted transparent;
+  box-shadow: none;
+  padding: 4px;
+  margin: 0;
+  color: #fff;
+  text-decoration: none;
+  font: inherit;
+}
+.desk-icon .glyph,
+.desk-icon .label {
+  width: 100%;
+  text-align: center;
+}
+.desk-icon:focus {
+  outline: none;
+}
+.desk-icon.selected {
+  border: 1px dotted #fff;
+}
+.desk-icon .glyph {
+  line-height: 0;
+  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.35));
+}
+.desk-icon .glyph svg {
+  display: block;
+  margin: 0 auto;
+}
+.desk-icon .label {
+  font-size: 11px;
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.6);
+  padding: 0 2px;
+}
+.desk-icon.selected .label {
+  background: #010081;
+  text-shadow: none;
+}
+
+/* ---- Taskbar ---- */
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px;
+  background: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  z-index: 1000;
+}
+.taskbar .start-btn {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  min-height: 28px;
+}
+
+/* Classic Windows flag (Start button) */
+.win-flag {
+  display: inline-block;
+  width: 15px;
+  height: 13px;
+  flex-shrink: 0;
+  background:
+    linear-gradient(#f24d4d, #f24d4d) 0 0 / 6px 5px no-repeat,
+    linear-gradient(#4bd24b, #4bd24b) 8px 0 / 6px 5px no-repeat,
+    linear-gradient(#3f9bff, #3f9bff) 0 7px / 6px 5px no-repeat,
+    linear-gradient(#ffd23f, #ffd23f) 8px 7px / 6px 5px no-repeat;
+  transform: perspective(12px) rotateY(-8deg);
+}
+
+/* Inline icons sit on the text baseline nicely */
+.exp-line svg,
+.tree-view svg,
+.menu-item svg,
+.task svg,
+.title-bar-text svg,
+.mail button svg,
+.start-menu li a svg {
+  vertical-align: -3px;
+}
+
+.taskbar .tasks {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  overflow: hidden;
+}
+.taskbar .task {
+  min-width: 130px;
+  max-width: 170px;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.taskbar .task.active {
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #808080,
+    inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+  font-weight: bold;
+}
+.title-bar-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.tray {
+  margin-left: auto;
+  border: 1px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  padding: 3px 10px;
+  font-size: 12px;
+}
+
+/* Maximized window fills the desktop above the taskbar */
+.win.maximized {
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+.win.maximized .win-body-scroll {
+  max-height: calc(100vh - 40px - 24px);
+}
+
+/* ---- Start menu ---- */
+.start-menu {
+  position: fixed;
+  bottom: 40px;
+  left: 4px;
+  width: 220px;
+  z-index: 1001;
+  display: flex;
+}
+.start-menu .rail {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  background: linear-gradient(0deg, #000080, #1084d0);
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 8px 4px;
+  text-align: right;
+}
+.start-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 2px;
+  flex: 1;
+}
+.start-menu li a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  color: #000;
+  text-decoration: none;
+  font-size: 13px;
+}
+.start-menu li a:hover {
+  background: #010081;
+  color: #fff;
+}
+
+/* Skills tree-view */
+.tree-view {
+  background: #fff;
 }
 
 /* ================================================
-   📱 RESPONSIVE IMPROVEMENTS
+   APP-STYLE WINDOWS  (each window emulates a Win95 app)
    ================================================ */
 
-/* Ensure section headers are visible on mobile scroll */
-@media (max-width: 1023px) {
-  section {
-    scroll-margin-top: 80px;
+/* Menu bar (File Edit View …) under the title bar */
+.menu-bar {
+  display: flex;
+  gap: 2px;
+  padding: 2px 6px;
+  font-size: 12px;
+  background: silver;
+  box-shadow: inset 0 -1px #808080;
+}
+.menu-item {
+  padding: 1px 6px;
+  cursor: default;
+}
+.menu-item:hover {
+  background: #010081;
+  color: #fff;
+}
+
+/* ---- Explorer detail list (Experience) ---- */
+.explorer {
+  background: #fff;
+  border: 2px solid;
+  border-color: #808080 #fff #fff #808080;
+}
+.exp-cols,
+.exp-line {
+  display: grid;
+  grid-template-columns: 1.7fr 1.1fr 1fr 0.9fr;
+  gap: 8px;
+  align-items: baseline;
+}
+.exp-cols {
+  background: silver;
+  padding: 3px 8px;
+  font-size: 12px;
+  box-shadow: inset -1px -1px #808080, inset 1px 1px #fff;
+}
+.exp-cols span {
+  border-right: 1px solid #808080;
+  padding-right: 6px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.exp-row {
+  padding: 7px 8px;
+  border-bottom: 1px solid #e6e6e6;
+}
+.exp-line {
+  font-size: 12px;
+  font-weight: bold;
+}
+.exp-line .muted {
+  font-weight: normal;
+}
+.exp-desc {
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 5px 0 6px;
+}
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.tag {
+  border: 1px solid #808080;
+  background: silver;
+  color: #000;
+  padding: 0 5px;
+  font-size: 11px;
+}
+.statusbar {
+  margin: 0;
+  padding: 3px 8px;
+  font-size: 11px;
+  background: silver;
+  box-shadow: inset 1px 1px #808080;
+}
+
+/* ---- Icon / folder grid (Projects) ---- */
+.icon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px;
+  background: #fff;
+  border: 2px solid;
+  border-color: #808080 #fff #fff #808080;
+}
+.file-icon {
+  width: 92px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 5px;
+  cursor: pointer;
+  text-align: center;
+  font: inherit;
+  color: #000;
+  background: transparent;
+  border: 1px dotted transparent;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.file-icon .glyph {
+  line-height: 0;
+}
+.file-icon .glyph svg {
+  display: block;
+  margin: 0 auto;
+}
+.file-icon .fname {
+  font-size: 12px;
+  line-height: 1.2;
+}
+.file-icon.selected {
+  border: 1px dotted #000080;
+}
+.file-icon.selected .fname {
+  background: #010081;
+  color: #fff;
+}
+
+/* ---- Mail compose (Contact) ---- */
+.mail .field-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+.mail .field-row label {
+  width: 58px;
+  text-align: right;
+  font-size: 12px;
+}
+.mail .field-row input {
+  flex: 1;
+}
+.mail-send {
+  min-width: 90px;
+}
+
+/* On small screens, stack windows in normal flow so the site is usable */
+@media (max-width: 767px) {
+  html,
+  body {
+    overflow: auto;
   }
-}
-
-/* Improved touch targets for mobile */
-@media (max-width: 768px) {
-  nav a, 
-  nav button {
-    min-height: 44px;
-    min-width: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .desktop {
+    position: static;
+    inset: auto;
+    padding: 12px;
+    padding-bottom: 56px;
+    min-height: 100vh;
   }
-}
-
-/* ================================================
-   🌊 SMOOTH TRANSITIONS
-   ================================================ */
-
-/* Smooth opacity transitions for list items */
-.group\/list > li {
-  transition: opacity 0.2s ease;
-}
-
-/* Card hover states */
-.group:hover .group-hover\:bg-slate-800\/50 {
-  background-color: rgba(30, 41, 59, 0.5);
-}
-
-/* Link underline animation */
-a span.border-b {
-  transition: border-color 0.25s ease;
-}
-
-/* ================================================
-   🎨 CUSTOM UTILITIES
-   ================================================ */
-
-/* Gradient text utility */
-.gradient-text {
-  @apply text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-400;
-}
-
-/* Subtle glow effect */
-.glow {
-  box-shadow: 0 0 40px -10px rgba(45, 212, 191, 0.3);
-}
-
-/* Glass morphism card */
-.glass-card {
-  @apply bg-slate-800/50 backdrop-blur-md border border-slate-700/50 rounded-lg;
+  .desk-icons {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .win {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100%;
+    margin-bottom: 12px;
+    transform: none !important;
+  }
+  .win-body-scroll {
+    max-height: none;
+  }
 }
