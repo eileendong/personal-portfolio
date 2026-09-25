@@ -331,7 +331,7 @@ export default function App() {
                 </p>
 
                 {/* Cat photo */}
-                <div className="mt-6 flex items-end gap-4">
+                <div className="mt-6 flex items-end gap-10">
                   <div>
                     <img
                       src="/images/cat.jpg"
@@ -340,9 +340,9 @@ export default function App() {
                     />
                     <p className="text-xs text-slate-500 mt-2">Pebbles ^^</p>
                   </div>
-                  <a href="/win95/" className="win95-btn" aria-label="View stylized Windows 95 version of this site">
+                  <a href="/win95/" className="win95-btn whitespace-nowrap" aria-label="View stylized Windows 95 version of this site">
                     <span className="win95-flag" aria-hidden="true" />
-                    View Stylized Version
+                    View Stylized Version!!
                   </a>
                 </div>
               </div>
