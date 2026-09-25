@@ -8,6 +8,7 @@ import { Settings } from "@react95/icons/Settings";
 import { Mail } from "@react95/icons/Mail";
 import { FileText } from "@react95/icons/FileText";
 import { Globe } from "@react95/icons/Globe";
+import { Camera } from "@react95/icons/Camera";
 import "./index.css";
 
 type IconProps = { variant?: string; className?: string; style?: React.CSSProperties };
@@ -96,7 +97,7 @@ const skillCategories = [
 
 /* ----------------------------- Window model ----------------------------- */
 
-type WinId = "about" | "experience" | "projects" | "skills" | "contact";
+type WinId = "about" | "experience" | "projects" | "skills" | "contact" | "pebbles";
 
 interface WinDef {
   id: WinId;
@@ -104,6 +105,8 @@ interface WinDef {
   x: number;
   y: number;
   w: number;
+  // Windows default to open on load; set false to require a desktop double-click.
+  autoOpen?: boolean;
 }
 
 // Overlapping desktop layout — windows spread across the desktop, each showing.
@@ -113,6 +116,7 @@ const WINDOWS: WinDef[] = [
   { id: "projects", title: "Projects — Explorer", x: 150, y: 250, w: 470 },
   { id: "skills", title: "Skills — Explorer", x: 700, y: 300, w: 300 },
   { id: "contact", title: "New Message", x: 320, y: 360, w: 400 },
+  { id: "pebbles", title: "pebbles.jpg — Preview", x: 260, y: 120, w: 380, autoOpen: false },
 ];
 
 // Draw order (last = topmost).
@@ -125,6 +129,7 @@ const WIN_ICON: Record<WinId, IconType> = {
   projects: Folder as unknown as IconType,
   skills: Settings as unknown as IconType,
   contact: Mail as unknown as IconType,
+  pebbles: Camera as unknown as IconType,
 };
 
 // Per-window "app-style" menu bars (visual only) — sells the different-app look.
@@ -134,6 +139,7 @@ const MENU_BARS: Record<WinId, string[]> = {
   projects: ["File", "Edit", "View", "Go", "Favorites"],
   skills: ["File", "Edit", "View", "Tools", "Help"],
   contact: ["File", "Edit", "View", "Insert", "Format"],
+  pebbles: ["File", "Edit", "View", "Help"],
 };
 
 const RESUME_URL = "/Eileen_Dong_Resume.pdf";
@@ -143,7 +149,9 @@ export default function App() {
     () => Object.fromEntries(WINDOWS.map((w) => [w.id, { x: w.x, y: w.y }])) as Record<WinId, { x: number; y: number }>
   );
   const [zOrder, setZOrder] = useState<WinId[]>(INITIAL_Z);
-  const [openIds, setOpenIds] = useState<Set<WinId>>(() => new Set(WINDOWS.map((w) => w.id)));
+  const [openIds, setOpenIds] = useState<Set<WinId>>(
+    () => new Set(WINDOWS.filter((w) => w.autoOpen !== false).map((w) => w.id))
+  );
   const [minimized, setMinimized] = useState<Set<WinId>>(() => new Set());
   const [maximized, setMaximized] = useState<Set<WinId>>(() => new Set());
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
@@ -207,7 +215,8 @@ export default function App() {
   const toggleMaximize = (id: WinId) =>
     setMaximized((s) => {
       const n = new Set(s);
-      n.has(id) ? n.delete(id) : n.add(id);
+      if (n.has(id)) n.delete(id);
+      else n.add(id);
       return n;
     });
 
@@ -407,6 +416,8 @@ function titleForIcon(id: WinId): string {
       return "Skills";
     case "contact":
       return "Contact";
+    case "pebbles":
+      return "Pebbles";
   }
 }
 
@@ -422,6 +433,8 @@ function renderBody(id: WinId) {
       return <SkillsBody />;
     case "contact":
       return <ContactBody />;
+    case "pebbles":
+      return <PebblesBody />;
   }
 }
 
@@ -628,6 +641,22 @@ function ContactBody() {
       <p className="statusbar" style={{ marginTop: 10 }}>
         © 2026 Eileen Dong · Built with React + 98.css
       </p>
+    </div>
+  );
+}
+
+// Pebbles → full-size photo viewer, opened from the desktop icon
+function PebblesBody() {
+  return (
+    <div>
+      <span className="inset" style={{ display: "block", background: "#fff", padding: 4 }}>
+        <img
+          src="/images/cat.jpg"
+          alt="Pebbles the cat"
+          style={{ display: "block", width: "100%", height: "auto" }}
+        />
+      </span>
+      <p className="statusbar" style={{ marginTop: 8 }}>Pebbles.jpg</p>
     </div>
   );
 }
