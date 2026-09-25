@@ -394,6 +394,9 @@ export default function App() {
             );
           })}
         </div>
+        <a href="/" className="task" title="Back to the regular site">
+          <Globe variant="16x16_4" /> Simple Version
+        </a>
         <div className="tray" title="Open to New Grad SWE roles · 2027">
           {clock}
         </div>
