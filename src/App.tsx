@@ -341,7 +341,8 @@ export default function App() {
                     <p className="text-xs text-slate-500 mt-2">Pebbles ^^</p>
                   </div>
                   <a href="/win95/" className="win95-btn" aria-label="View stylized Windows 95 version of this site">
-                    🖥️ View Stylized Version
+                    <span className="win95-flag" aria-hidden="true" />
+                    View Stylized Version
                   </a>
                 </div>
               </div>

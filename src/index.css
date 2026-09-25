@@ -189,3 +189,17 @@ a span.border-b {
     inset 2px 2px grey;
   padding: 9px 13px 7px 15px;
 }
+
+/* The classic Win95 Start-menu flag, drawn in CSS (no image asset) */
+.win95-flag {
+  display: inline-block;
+  width: 15px;
+  height: 13px;
+  flex-shrink: 0;
+  background:
+    linear-gradient(#f24d4d, #f24d4d) 0 0 / 6px 5px no-repeat,
+    linear-gradient(#4bd24b, #4bd24b) 8px 0 / 6px 5px no-repeat,
+    linear-gradient(#3f9bff, #3f9bff) 0 7px / 6px 5px no-repeat,
+    linear-gradient(#ffd23f, #ffd23f) 8px 7px / 6px 5px no-repeat;
+  transform: perspective(12px) rotateY(-8deg);
+}
