@@ -682,7 +682,7 @@ export default function App() {
             <X className="h-4 w-4" /> Close
           </button>
           <iframe
-            src="/win95/"
+            src="/win95/index.html"
             title="Windows 95 stylized version"
             className="h-full w-full border-0"
           />
