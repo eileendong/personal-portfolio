@@ -420,7 +420,7 @@ function titleForIcon(id: WinId): string {
     case "contact":
       return "Contact";
     case "pebbles":
-      return "Pebbles";
+      return "pebbles.jpg";
   }
 }
 
