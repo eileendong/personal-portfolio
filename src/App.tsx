@@ -183,7 +183,7 @@ export default function App() {
           <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24">
             <div>
               {/* Profile Photo */}
-              <div className="mb-6">
+              <div className="relative z-40 mb-6">
                 <img
                   src="/eileen-photo.jpeg"
                   alt="Eileen Dong"
@@ -342,7 +342,7 @@ export default function App() {
                 </p>
 
                 {/* Cat photo */}
-                <div className="mt-6 flex items-end gap-10">
+                <div className="relative z-40 mt-6 flex items-end gap-10">
                   <div>
                     <img
                       src="/images/cat.jpg"
