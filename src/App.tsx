@@ -437,7 +437,7 @@ export default function App() {
 
                 <div className="mt-12">
                   <a
-                    href="https://drive.google.com/file/d/1Zq8XdVQiVLua2d3aVbJX5PMwk8XZ3pGX/view?usp=sharing"
+                    href="/Eileen_Dong_Resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center font-medium leading-tight text-slate-200 group"
