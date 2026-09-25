@@ -358,7 +358,7 @@ export default function App() {
                     aria-label="View stylized Windows 95 version of this site"
                   >
                     <span className="win95-flag" aria-hidden="true" />
-                    View Stylized Version!!
+                    View the Cool Version!!
                   </button>
                 </div>
               </div>
