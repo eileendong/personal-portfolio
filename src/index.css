@@ -153,3 +153,39 @@ a span.border-b {
 .glass-card {
   @apply bg-slate-800/50 backdrop-blur-md border border-slate-700/50 rounded-lg;
 }
+
+/* ================================================
+   🖥️ WIN95 TEASER BUTTON — links out to /win95/
+   ================================================ */
+
+.win95-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: #c0c0c0;
+  color: #000;
+  font-family: "MS Sans Serif", Tahoma, Geneva, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1;
+  box-shadow:
+    inset -1px -1px #0a0a0a,
+    inset 1px 1px #fff,
+    inset -2px -2px grey,
+    inset 2px 2px #dfdfdf;
+}
+
+.win95-btn:hover {
+  color: #000;
+}
+
+.win95-btn:active {
+  box-shadow:
+    inset -1px -1px #fff,
+    inset 1px 1px #0a0a0a,
+    inset -2px -2px #dfdfdf,
+    inset 2px 2px grey;
+  padding: 9px 13px 7px 15px;
+}

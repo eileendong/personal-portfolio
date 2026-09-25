@@ -331,16 +331,19 @@ export default function App() {
                 </p>
 
                 {/* Cat photo */}
-                <div className="mt-6">
-                  <img
-                    src="/images/cat.jpg"
-                    alt="Pebbles the cat being petted"
-                    className="rounded-lg w-48 h-48 object-cover shadow-lg border border-slate-700/50"
-                  />
-                  <p className="text-xs text-slate-500 mt-2">Pebbles ^^</p>
+                <div className="mt-6 flex items-end gap-4">
+                  <div>
+                    <img
+                      src="/images/cat.jpg"
+                      alt="Pebbles the cat being petted"
+                      className="rounded-lg w-48 h-48 object-cover shadow-lg border border-slate-700/50"
+                    />
+                    <p className="text-xs text-slate-500 mt-2">Pebbles ^^</p>
+                  </div>
+                  <a href="/win95/" className="win95-btn" aria-label="View stylized Windows 95 version of this site">
+                    🖥️ View Stylized Version
+                  </a>
                 </div>
-
-
               </div>
             </section>
 
