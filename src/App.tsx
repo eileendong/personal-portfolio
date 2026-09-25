@@ -117,6 +117,17 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [showWin95, setShowWin95] = useState(false);
+
+  // Close the stylized overlay with Escape
+  useEffect(() => {
+    if (!showWin95) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowWin95(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [showWin95]);
 
   // Track mouse position for spotlight effect
   useEffect(() => {
@@ -340,10 +351,15 @@ export default function App() {
                     />
                     <p className="text-xs text-slate-500 mt-2">Pebbles ^^</p>
                   </div>
-                  <a href="/win95/" className="win95-btn whitespace-nowrap" aria-label="View stylized Windows 95 version of this site">
+                  <button
+                    type="button"
+                    onClick={() => setShowWin95(true)}
+                    className="win95-btn whitespace-nowrap"
+                    aria-label="View stylized Windows 95 version of this site"
+                  >
                     <span className="win95-flag" aria-hidden="true" />
                     View Stylized Version!!
-                  </a>
+                  </button>
                 </div>
               </div>
             </section>
@@ -653,6 +669,25 @@ export default function App() {
           </main>
         </div>
       </div>
+
+      {/* Stylized version overlay — same page, iframed build, no navigation */}
+      {showWin95 && (
+        <div className="fixed inset-0 z-50 bg-slate-950">
+          <button
+            type="button"
+            onClick={() => setShowWin95(false)}
+            aria-label="Close stylized version"
+            className="win95-btn absolute right-4 top-4 z-10"
+          >
+            <X className="h-4 w-4" /> Close
+          </button>
+          <iframe
+            src="/win95/"
+            title="Windows 95 stylized version"
+            className="h-full w-full border-0"
+          />
+        </div>
+      )}
     </div>
   );
 }
