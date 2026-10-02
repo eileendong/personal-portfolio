@@ -23,8 +23,8 @@ const experiences = [
     companyUrl: "https://www.axon.com",
     location: "Seattle, WA",
     description:
-      "Incoming DevOps platform intern building a zero-touch DevOps application to automate end-to-end infrastructure provisioning and deployment workflows at scale.",
-    tech: ["DevOps", "Infrastructure", "Automation"],
+      "Built Kubernetes-based ephemeral preview environments that give every pull request an isolated, live HTTPS gateway — 41 PRs across 148 automated deployments. Designed a controllerless GitOps architecture (GitHub Actions, OCI Helm charts, ArgoCD). Hardened execution of unreviewed PR code with Istio TLS termination, Kyverno policy enforcement, and FIPS crypto.",
+    tech: ["Kubernetes", "GitOps", "ArgoCD"],
   },
   {
     period: "Summer 2025",
